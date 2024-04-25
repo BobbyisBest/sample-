@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carpet Store - Services</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar {
+            background-color: #5cb85c; /* Green */
+        }
+
+        .service-section {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .service-section img {
+            max-width: 100%;
+            height: 200px; /* Fixed height for all images */
+            object-fit: cover; /* Maintain aspect ratio */
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-section h3 {
+            margin-top: 20px;
+            color: #5cb85c; /* Green */
+        }
+
+        .service-section p {
+            margin-top: 10px;
+        }
+
+        .footer {
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        .footer p {
+            margin-bottom: 0;
+        }
+        body {
+    background-color: #f4f4f4;
+    color: #333;
+    font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+        background-color: #5cb85c; /* Green */
+    }
+
+    .navbar-brand,
+    .navbar-nav .nav-link {
+        color: white;
+        font-weight: bold;
+    }
+
+    .navbar-toggler-icon {
+        background-color: white;
+    }
+
+    .navbar-toggler {
+        border-color: white;
+    }
+
+    .jumbotron {
+        background-image: url('carpet-store.jpg');
+        background-size: cover;
+        color: rgb(0, 0, 0);
+        text-shadow: 2px 2px 4px #5cb85c;
+        background-color: rgba(232, 227, 227, 0.6); /* Dark overlay */
+    }
+    @keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.navbar-nav .nav-link {
+    color: white;
+    font-weight: bold;
+    animation: slideIn 0.5s ease-in-out forwards;
+    opacity: 0; /* Start with opacity 0 */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #333; /* Change to desired hover color */
+}
+
+
+    </style>
+</head>
+
+<body>
+
+ <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">Carpet Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="store.html">Store</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="services.html">Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="login.html">Login</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+        <!-- Page Title -->
+        <div class="container-xxl py-1">
+            <div class="container">
+                <div class="row g-5 align-items-end mb-5">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="border-start border-5 border-primary ps-4">
+                            <h6 class="text-body text-uppercase mb-2">Services PAGE</h6>
+                            <h1 class="display-6 mb-0">User Information</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Services Section -->
+    <div class="container service-section">
+        <div class="row">
+            <!-- Service 1 -->
+            <div class="col-md-4">
+                <img src="img/carpet-cleaner-removing-dirt.avif" alt="Carpet Cleaning" class="img-fluid">
+                <h3>Carpet Cleaning</h3>
+                <p>We offer professional carpet cleaning services to keep your carpets looking fresh and new.</p>
+            </div>
+            <!-- Service 2 -->
+            <div class="col-md-4">
+                <img src="img/Installation.jpg" alt="Carpet Installation" class="img-fluid">
+                <h3>Carpet Installation</h3>
+                <p>Our expert team provides quality carpet installation services to ensure a perfect fit for your home.</p>
+            </div>
+            <!-- Service 3 -->
+            <div class="col-md-4">
+                <img src="img/Repair" alt="Carpet Repair" class="img-fluid">
+                <h3>Carpet Repair</h3>
+                <p>We offer carpet repair services to fix damages and extend the lifespan of your carpets.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer text-white text-center p-3">
+        <p>&copy; 2024 Carpet Store. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

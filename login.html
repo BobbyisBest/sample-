@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carpet Store</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+
+    
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">Carpet Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="store.html">Store</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="services.html">Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+    
+    <style>
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .navbar {
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        .footer {
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        .navbar {
+            background-color: #5cb85c; /* Green */
+        }
+
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: white;
+            font-weight: bold;
+        }
+
+        .navbar-toggler-icon {
+            background-color: white;
+        }
+
+        .navbar-toggler {
+            border-color: white;
+        }
+
+        .jumbotron {
+            background-image: url('carpet-store.jpg');
+            background-size: cover;
+            color: rgb(0, 0, 0);
+            text-shadow: 2px 2px 4px #5cb85c;
+            background-color: rgba(232, 227, 227, 0.6); /* Dark overlay */
+        }
+        @keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.navbar-nav .nav-link {
+    color: white;
+    font-weight: bold;
+    animation: slideIn 0.5s ease-in-out forwards;
+    opacity: 0; /* Start with opacity 0 */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #333; /* Change to desired hover color */
+}
+
+    </style>
+    
+</head>
+
+<body>
+
+    <!-- Page Title -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5 align-items-end mb-5">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="border-start border-5 border-primary ps-4">
+                        <h6 class="text-body text-uppercase mb-2">LOGIN PAGE</h6>
+                        <h1 class="display-6 mb-0">User Information</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Login Form -->
+            <div class="col-md-6">
+                <h2>Login</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginUsername">Username:</label>
+                        <input type="text" class="form-control" id="loginUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password:</label> 
+                        <input type="password" class="form-control" id="loginPassword" required> 
+                        
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="login()">Login</button>
+                    
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div class="col-md-6">
+                <h2>Register</h2>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="regUsername">Username:</label>
+                        <input type="text" class="form-control" id="regUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPassword">Password:</label>
+                        <input type="password" class="form-control" id="regPassword" required>
+                    </div>
+                    <button type="button" class="btn btn-success" onclick="register()">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- WOW.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+
+        <!-- Footer -->
+        <footer class="footer text-white text-center p-3">
+            <p>&copy; 2024 Carpet Store. All rights reserved.</p>
+        </footer>
+
+    <!-- Custom Scripts -->
+    <script>
+        function register() {
+            const username = document.getElementById('regUsername').value;
+            const password = document.getElementById('regPassword').value;
+
+            if (localStorage.getItem(username)) {
+                alert('Username already exists!');
+                return;
+            }
+
+            localStorage.setItem(username, password);
+            updateAccountTable();
+            document.getElementById('registerForm').reset();
+        }
+
+        function login() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (password === localStorage.getItem(username)) {
+                if (localStorage.getItem(username + '_isAdmin')) {
+                    alert('Login successful as admin!');
+                    window.location.href = 'admin.html';
+                } else {
+                    alert('Login successful!');
+                    window.location.href = 'Mindex.html';
+                }
+            } else {
+                alert('Invalid username or password!');
+            }
+        }
+
+        function promoteToAdmin(username) {
+            localStorage.setItem(username + '_isAdmin', true);
+            updateAccountTable();
+        }
+
+        function deleteAccount(username) {
+            localStorage.removeItem(username);
+            localStorage.removeItem(username + '_isAdmin');
+            updateAccountTable();
+        }
+
+        function updateAccountTable() {
+            const tableBody = document.getElementById('accountTableBody');
+            tableBody.innerHTML = '';
+
+            for (let i = 0; i < localStorage.length; i++) {
+                const username = localStorage.key(i);
+                const password = localStorage.getItem(username);
+
+                const row = tableBody.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                const cell3 = row.insertCell(2);
+
+                cell1.innerHTML = username;
+                cell2.innerHTML = password;
+                cell3.innerHTML = `
+                
+                    <button class="btn btn-danger mr-2" onclick="deleteAccount('${username}')">Delete</button>
+                    <button class="btn btn-success" onclick="promoteToAdmin('${username}')">Promote to Admin</button>
+                `;
+            }
+        }
+
+        function addAdmin() {
+            const adminUsername = 'liam';
+            const adminPassword = 'liam';
+
+            if (!localStorage.getItem(adminUsername)) {
+                localStorage.setItem(adminUsername, adminPassword);
+                localStorage.setItem(adminUsername + '_isAdmin', true);
+                alert('Admin account created successfully!');
+            }
+        }
+
+        addAdmin();
+        updateAccountTable();
+    </script>
+
+</body>
+
+</html>

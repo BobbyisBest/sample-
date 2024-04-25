@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carpet Store</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 60px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: left;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+        .footer {
+            background-color: #ff0000;
+            color: white;
+        }
+
+        .footer p {
+            margin-bottom: 0;
+        }
+        @keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.navbar-nav .nav-link {
+    color: white;
+    font-weight: bold;
+    animation: slideIn 0.5s ease-in-out forwards;
+    opacity: 0; /* Start with opacity 0 */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #333; /* Change to desired hover color */
+}
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
+        <a class="navbar-brand" href="#">Carpet Store</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="Aindex.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Astore.html">Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Aservices.html">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Acontact.html">Contact Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin.html">Accounts Dashboard</a>
+                </li>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Sign Out</a>
+            </li>
+        </ul>
+            </ul>
+        </div>
+    </nav>
+
+    <!--Page Title-->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5 align-items-end mb-5">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="border-start border-5 border-primary ps-4">
+                        <h6 class="text-body text-uppercase mb-2">Administrator Information</h6>
+                        <h1 class="display-6 mb-0">Account Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- local Storage Accounts -->
+    <div class="container mt-2">
+        <h2 class="text-center">Registered Accounts</h2>
+        <form id="addAccountForm">
+            <div class="form-row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Username" id="usernameInput" required>
+                </div>
+                <div class="col">
+                    <input type="password" class="form-control" placeholder="Password" id="passwordInput" required>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Add Account</button>
+                </div>
+            </div>
+        </form>
+        <!-- Table Coloms and Names-->
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="accountTableBody">
+            </tbody>
+        </table>
+        <!-- Local Storage Admin Accounts -->
+        <h2 class="text-center mt-5">Admin Accounts</h2>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="adminTableBody">
+            </tbody>
+        </table>
+    </div>
+
+    <!-- JavaScript/Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Account Register Form (Top Of Page)
+        document.addEventListener('DOMContentLoaded', () => {
+            const addAccountForm = document.getElementById('addAccountForm');
+            addAccountForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const username = document.getElementById('usernameInput').value;
+                const password = document.getElementById('passwordInput').value;
+
+                if (!localStorage.getItem(username)) {
+                    localStorage.setItem(username, password);
+                    updateTables();
+                    alert(`User ${username} has been added!`);
+                    addAccountForm.reset();
+                } else {
+                    alert('Username already exists! Please choose a different username.');
+                }
+            });
+
+            updateTables();
+        });
+        // Delete Account Button
+        function deleteAccount(username) {
+            localStorage.removeItem(username);
+            localStorage.removeItem(`admin_${username}`);
+            updateTables();
+            alert(`User ${username} has been deleted!`);
+        }
+        // Promote Account Button
+        function promoteToAdmin(username) {
+            localStorage.setItem(`admin_${username}`, localStorage.getItem(username));
+            updateTables();
+            alert(`User ${username} has been promoted to admin!`);
+        }
+        // Demote Account Button
+        function demoteAdmin(username) {
+            localStorage.setItem(username, localStorage.getItem(`admin_${username}`));
+            localStorage.removeItem(`admin_${username}`);
+            updateTables();
+            alert(`Admin privileges have been revoked for user ${username}!`);
+        }
+        // Updateing Table from login/registering members
+        function updateTables() {
+            updateTable('accountTableBody', (key) => !key.startsWith('admin_'), (username) => `
+                <button class="btn btn-danger mr-2" onclick="deleteAccount('${username}')">Delete</button>
+                <button class="btn btn-success" onclick="promoteToAdmin('${username}')">Promote to Admin</button>
+            `);
+            updateTable('adminTableBody', (key) => key.startsWith('admin_'), (username) => `
+                <button class="btn btn-danger mr-2" onclick="deleteAccount('${username}')">Delete</button>
+                <button class="btn btn-warning" onclick="demoteAdmin('${username}')">Demote Admin</button>
+            `);
+        }
+        // Table Creation 
+        function updateTable(tableId, filterFunc, actionButtons) {
+            const tableBody = document.getElementById(tableId);
+            tableBody.innerHTML = '';
+
+            for (let i = 0; i < localStorage.length; i++) {
+                const username = localStorage.key(i);
+                const password = localStorage.getItem(username);
+
+                if (filterFunc(username)) {
+                    const row = tableBody.insertRow();
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    const cell3 = row.insertCell(2);
+
+                    cell1.innerHTML = username;
+                    cell2.innerHTML = password;
+                    cell3.innerHTML = actionButtons(username);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

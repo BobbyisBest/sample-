@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carpet Store</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar {
+            background-color: #5cb85c; /* Green */
+        }
+
+        .info-section {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .info-section img {
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-section h3 {
+            margin-top: 20px;
+            color: #5cb85c; /* Green */
+        }
+
+        .info-section p {
+            margin-top: 10px;
+        }
+
+        .calculator-container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        .footer p {
+            margin-bottom: 0;
+        }
+        @keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.navbar-nav .nav-link {
+    color: white;
+    font-weight: bold;
+    animation: slideIn 0.5s ease-in-out forwards;
+    opacity: 0; /* Start with opacity 0 */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #333; /* Change to desired hover color */
+}
+
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">Carpet Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="Mindex.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Mstore.html">Store</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Mservice.html">Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Mcontact.html">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Maccount.html">Account</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Sign Out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+    <!-- Carpet Calculator -->
+    <div class="container mt-5">
+        <div class="calculator-container">
+            <h3 class="text-center">Carpet Price Calculator</h3>
+            <form>
+                <div class="form-group">
+                    <label for="carpetType">Select Carpet Type:</label>
+                    <select class="form-control" id="carpetType" onchange="updateCalculator()">
+                        <!-- Load carpet types from localStorage or use default values -->
+                        <script>
+                            const savedCarpetTypes = JSON.parse(localStorage.getItem('carpetTypes')) || [
+                                { value: "10", name: "Type A" },
+                                { value: "15", name: "Type B" },
+                                { value: "20", name: "Type C" }
+                            ];
+                            
+                            savedCarpetTypes.forEach(carpet => {
+                                const option = document.createElement("option");
+                                option.value = carpet.value;
+                                option.setAttribute('data-name', carpet.name);
+                                option.innerText = `${carpet.name} - $${carpet.value}/sqm`;
+                                document.getElementById("carpetType").appendChild(option);
+                            });
+                        </script>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="area">Area (in square meters):</label>
+                    <input type="number" class="form-control" id="area" placeholder="Enter area" oninput="calculatePrice()">
+                </div>
+                <div class="form-group">
+                    <h4 class="text-center">Total Price: $<span id="totalPrice">0</span></h4>
+                </div>
+                <div class="form-group text-center">
+                    <a href="Mstore.html" class="btn btn-primary">Purchase</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer text-white text-center p-3 mt-5">
+        <p>&copy; 2024 Carpet Store. All rights reserved.</p>
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function calculatePrice() {
+            const carpetPrice = document.getElementById("carpetType").value;
+            const area = document.getElementById("area").value;
+
+            if (!isNaN(area) && area > 0) {
+                const totalPrice = area * carpetPrice;
+                document.getElementById("totalPrice").innerText = totalPrice.toFixed(2);
+            } else {
+                document.getElementById("totalPrice").innerText = "0";
+            }
+        }
+
+        function updateCalculator() {
+            calculatePrice();
+
+            const selectOption = document.getElementById("carpetType").selectedOptions[0];
+            alert(`Selected carpet: ${selectOption.getAttribute('data-name')} - $${selectOption.value}/sqm.`);
+        }
+
+        function saveCarpetTypes() {
+            const carpetOptions = Array.from(document.getElementById("carpetType").options);
+            const carpetTypes = carpetOptions.map(option => ({
+                value: option.value,
+                name: option.getAttribute('data-name')
+            }));
+            localStorage.setItem('carpetTypes', JSON.stringify(carpetTypes));
+        }
+
+        // Update the calculator price when the page loads
+        calculatePrice();
+
+    </script>
+
+</body>
+
+</html>
